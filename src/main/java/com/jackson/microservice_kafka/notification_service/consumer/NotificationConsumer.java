@@ -20,7 +20,7 @@ public class NotificationConsumer {
     private String consumerGroupId;
 
     @KafkaListener(topics = "#{__listener.orderCreatedTopic}", groupId = "#{__listener.consumerGroupId}")
-    public void consumeOrderCreated(ConsumerRecord<String, Order> record) {
+    public void consumeOrderCreated(ConsumerRecord<String, OrderEventDto> record) {
         Order order = record.value();
         String subject = "Order Created: " + order.getOrderNumber();
         String message = String.format(
