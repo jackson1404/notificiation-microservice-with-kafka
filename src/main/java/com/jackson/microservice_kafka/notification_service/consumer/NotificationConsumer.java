@@ -1,7 +1,10 @@
 package com.jackson.microservice_kafka.notification_service.consumer;
 
+import com.jackson.microservice_kafka.notification_service.dto.OrderEventDto;
 import com.jackson.microservice_kafka.notification_service.service.EmailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class NotificationConsumer {
 
     private final EmailService emailService;
@@ -21,7 +25,7 @@ public class NotificationConsumer {
 
     @KafkaListener(topics = "#{__listener.orderCreatedTopic}", groupId = "#{__listener.consumerGroupId}")
     public void consumeOrderCreated(ConsumerRecord<String, OrderEventDto> record) {
-        Order order = record.value();
+        OrderEventDto order = record.value();
         String subject = "Order Created: " + order.getOrderNumber();
         String message = String.format(
                 "Dear Customer,\n\nYour order #%s has been created successfully.\n\nTotal: $%.2f",
