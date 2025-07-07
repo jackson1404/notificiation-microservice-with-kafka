@@ -22,14 +22,6 @@ spring:
           starttls:
             enable: true
           connectiontimeout: 5000
-
-app:
-  kafka:
-    consumer-group-id: notification-group
-  topics:
-    order-created: order-created-topic
-    order-processed: order-processed-topic
-
 server:
   port: 8083
 

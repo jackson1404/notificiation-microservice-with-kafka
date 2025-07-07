@@ -13,15 +13,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class NotificationConsumer {
 
     private final EmailService emailService;
 
     private final AppTopicProperties appTopicProperties;
-    
-    @KafkaListener(topics = "#{@appTopicProperties.topics.orderCreated}", groupId = "#{@appTopicProperties.kafka.consumerGroupId}")
+
+    public NotificationConsumer(EmailService emailService, AppTopicProperties appTopicProperties) {
+        this.emailService = emailService;
+        this.appTopicProperties = appTopicProperties;
+    }
+
+    @KafkaListener(topics = "#{appTopicProperties.topics.orderCreated}", groupId = "#{appTopicProperties.kafka.consumerGroups.orderCreated}")
     public void consumeOrderCreated(ConsumerRecord<String, OrderEventDto> record) {
         OrderEventDto order = record.value();
         String subject = "Order Created: " + order.getOrderNumber();

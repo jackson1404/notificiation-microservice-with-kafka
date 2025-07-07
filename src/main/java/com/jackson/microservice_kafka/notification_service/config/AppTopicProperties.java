@@ -35,17 +35,28 @@ public class AppTopicProperties {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Topics{
-
         private String orderCreated;
         private String orderProcessed;
-
+        private String inventoryCheck;
+        private String inventoryUpdated;
     }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Kafka{
-        private String consumerGroupId;
+        private ConsumerGroups consumerGroups;
+
+        @Data
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class ConsumerGroups{
+
+            private String orderCreated;
+            private String orderProcessed;
+            private String inventoryCheck;
+            private String inventoryUpdated;
+        }
     }
 
 }
