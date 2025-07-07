@@ -4,7 +4,6 @@ spring:
   kafka:
     bootstrap-servers: localhost:29092
     consumer:
-      group-id: notification-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -25,6 +24,8 @@ spring:
           connectiontimeout: 5000
 
 app:
+  kafka:
+    consumer-group-id: notification-group
   topics:
     order-created: order-created-topic
     order-processed: order-processed-topic

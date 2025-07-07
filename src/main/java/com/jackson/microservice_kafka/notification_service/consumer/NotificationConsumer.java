@@ -1,7 +1,9 @@
 package com.jackson.microservice_kafka.notification_service.consumer;
 
+import com.jackson.microservice_kafka.notification_service.config.AppTopicProperties;
 import com.jackson.microservice_kafka.notification_service.dto.OrderEventDto;
 import com.jackson.microservice_kafka.notification_service.service.EmailService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -17,13 +19,9 @@ public class NotificationConsumer {
 
     private final EmailService emailService;
 
-    @Value("${app.topics.order-created}")
-    private String orderCreatedTopic;
-
-    @Value("${spring.kafka.consumer.group-id}")
-    private String consumerGroupId;
-
-    @KafkaListener(topics = "#{__listener.orderCreatedTopic}", groupId = "#{__listener.consumerGroupId}")
+    private final AppTopicProperties appTopicProperties;
+    
+    @KafkaListener(topics = "#{@appTopicProperties.topics.orderCreated}", groupId = "#{@appTopicProperties.kafka.consumerGroupId}")
     public void consumeOrderCreated(ConsumerRecord<String, OrderEventDto> record) {
         OrderEventDto order = record.value();
         String subject = "Order Created: " + order.getOrderNumber();
@@ -36,3 +34,4 @@ public class NotificationConsumer {
     }
 
 }
+
