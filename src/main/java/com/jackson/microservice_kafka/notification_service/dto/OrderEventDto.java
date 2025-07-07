@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class OrderEventDto {
 
     private String orderNumber;
+    private String orderStatus;
+    private String message;
     private String customerId;
     private Double totalPrice;
 }

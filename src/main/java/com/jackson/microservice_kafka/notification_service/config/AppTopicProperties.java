@@ -56,6 +56,10 @@ public class AppTopicProperties {
             private String orderProcessed;
             private String inventoryCheck;
             private String inventoryUpdated;
+            private String notificationOrderCreated;
+            private String notificationOrderProcessed;
+            private String notificationInventoryCheck;
+
         }
     }
 
