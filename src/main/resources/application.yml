@@ -25,3 +25,19 @@ spring:
 server:
   port: 8083
 
+app:
+  topics:
+    order-created: order-created-topic
+    order-processed: order-processed-topic
+    inventory-check: inventory-check-topic
+    inventory-updated: inventory-updated-topic
+  kafka:
+    consumer-groups:
+      order-created: order-created-group
+      order-processed: order-processed-group
+      inventory-check: inventory-check-group
+      inventory-updated: inventory-update-group
+      notification-order-created: notification-order-created-group
+      notification-order-processed: notification-order-processed-group
+      notification-inventory-check: notification-inventory-check-group
+

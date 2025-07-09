@@ -1,6 +1,6 @@
 package com.jackson.microservice_kafka.notification_service;
 
-import com.jackson.microservice_kafka.notification_service.config.AppTopicProperties;
+//import com.jackson.microservice_kafka.notification_service.config.AppTopicProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
